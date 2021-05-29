@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2021 at 02:18 PM
+-- Generation Time: May 29, 2021 at 12:41 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -24,43 +24,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `amount_of_data`
+-- Table structure for table `choices`
 --
 
-CREATE TABLE `amount_of_data` (
-  `id` varchar(20) NOT NULL,
-  `count` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `amount_of_data`
---
-
-INSERT INTO `amount_of_data` (`id`, `count`) VALUES
-('question', 0),
-('user', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `choice`
---
-
-CREATE TABLE `choice` (
-  `id` varchar(10) NOT NULL,
+CREATE TABLE `choices` (
+  `id` int(11) NOT NULL,
   `value` varchar(250) NOT NULL,
   `is_correct` tinyint(4) NOT NULL,
   `is_deleted` tinyint(4) NOT NULL,
-  `question` varchar(10) NOT NULL
+  `question` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `choices`
+--
+
+INSERT INTO `choices` (`id`, `value`, `is_correct`, `is_deleted`, `question`) VALUES
+(1, 'tes', 0, 0, 1),
+(2, '2', 0, 0, 1),
+(3, '3', 0, 0, 1),
+(4, '4', 0, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `code`
+-- Table structure for table `codes`
 --
 
-CREATE TABLE `code` (
+CREATE TABLE `codes` (
   `id` varchar(20) NOT NULL,
   `sent_date` datetime DEFAULT NULL,
   `is_used` tinyint(4) NOT NULL DEFAULT 0,
@@ -68,53 +59,53 @@ CREATE TABLE `code` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `code`
+-- Dumping data for table `codes`
 --
 
-INSERT INTO `code` (`id`, `sent_date`, `is_used`, `user`) VALUES
-('TOEFL-it5cTJ7G68vCXq', NULL, 0, 'U771234761');
+INSERT INTO `codes` (`id`, `sent_date`, `is_used`, `user`) VALUES
+('TOEFL-x5VFMaQmGVNe4D', NULL, 0, 'U771234761');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exam`
+-- Table structure for table `exams`
 --
 
-CREATE TABLE `exam` (
+CREATE TABLE `exams` (
   `id` varchar(20) NOT NULL,
   `score` float DEFAULT NULL,
   `is_passed` tinyint(4) NOT NULL,
-  `schedule` varchar(10) NOT NULL
+  `schedule` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `exam`
+-- Dumping data for table `exams`
 --
 
-INSERT INTO `exam` (`id`, `score`, `is_passed`, `schedule`) VALUES
-('TOEFL-it5cTJ7G68vCXq', NULL, 0, 'S000000002');
+INSERT INTO `exams` (`id`, `score`, `is_passed`, `schedule`) VALUES
+('TOEFL-x5VFMaQmGVNe4D', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exam_question`
+-- Table structure for table `exam_questions`
 --
 
-CREATE TABLE `exam_question` (
+CREATE TABLE `exam_questions` (
   `id` int(11) NOT NULL,
   `is_correct` tinyint(4) NOT NULL,
   `exam` varchar(20) NOT NULL,
-  `question` varchar(10) NOT NULL
+  `question` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `package`
+-- Table structure for table `packages`
 --
 
-CREATE TABLE `package` (
-  `id` varchar(10) NOT NULL,
+CREATE TABLE `packages` (
+  `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
   `duration` int(11) NOT NULL,
   `number_of_question` int(11) NOT NULL,
@@ -122,71 +113,107 @@ CREATE TABLE `package` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `package`
+-- Dumping data for table `packages`
 --
 
-INSERT INTO `package` (`id`, `name`, `duration`, `number_of_question`, `is_delete`) VALUES
-('TOEFL', 'CBT TOEFL', 120, 0, 0);
+INSERT INTO `packages` (`id`, `name`, `duration`, `number_of_question`, `is_delete`) VALUES
+(1, 'CBT TOEFL', 120, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question`
+-- Table structure for table `questions`
 --
 
-CREATE TABLE `question` (
-  `id` varchar(10) NOT NULL,
-  `value` varchar(250) NOT NULL,
+CREATE TABLE `questions` (
+  `id` int(11) NOT NULL,
+  `value` text NOT NULL,
   `is_deleted` tinyint(4) NOT NULL,
-  `segment` varchar(10) NOT NULL
+  `segment` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `value`, `is_deleted`, `segment`) VALUES
+(1, 'Tes', 0, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule`
+-- Table structure for table `schedules`
 --
 
-CREATE TABLE `schedule` (
-  `id` varchar(10) NOT NULL,
+CREATE TABLE `schedules` (
+  `id` int(11) NOT NULL,
   `title` varchar(250) NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `number_of_user` int(11) NOT NULL,
   `is_expired` tinyint(4) NOT NULL,
-  `package` varchar(10) NOT NULL
+  `package` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `schedule`
+-- Dumping data for table `schedules`
 --
 
-INSERT INTO `schedule` (`id`, `title`, `start_date`, `end_date`, `number_of_user`, `is_expired`, `package`) VALUES
-('S000000001', 'CBT Toefl (Listening, Reading, Writing)', '2021-06-01 09:00:00', '2021-06-01 12:00:00', 0, 0, 'TOEFL'),
-('S000000002', 'CBT Toefl (Listening, Reading, Writing)', '2021-06-08 09:00:00', '2021-06-08 12:00:00', 0, 0, 'TOEFL');
+INSERT INTO `schedules` (`id`, `title`, `start_date`, `end_date`, `number_of_user`, `is_expired`, `package`) VALUES
+(1, 'CBT Toefl (Listening, Reading, Writing)', '2021-06-01 09:00:00', '2021-06-01 12:00:00', 0, 0, 1),
+(2, 'CBT Toefl (Listening, Reading, Writing)', '2021-06-08 09:00:00', '2021-06-08 12:00:00', 0, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `seqment`
+-- Table structure for table `sections`
 --
 
-CREATE TABLE `seqment` (
-  `id` varchar(10) NOT NULL,
+CREATE TABLE `sections` (
+  `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
   `example` varchar(250) NOT NULL,
   `number_of_question` int(11) NOT NULL,
   `is_deleted` tinyint(4) NOT NULL,
-  `package` varchar(10) NOT NULL
+  `package` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `name`, `example`, `number_of_question`, `is_deleted`, `package`) VALUES
+(1, '1. Listening Comprehension', 'tes', 0, 0, 1),
+(2, '2. Structure & Written Expression', 'Test', 0, 0, 1),
+(3, '3. Reading Comprehension', 'tes', 0, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `segments`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `segments` (
+  `id` int(11) NOT NULL,
+  `attachment` varchar(250) DEFAULT NULL,
+  `type` enum('audio','text','image','') DEFAULT NULL,
+  `section` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `segments`
+--
+
+INSERT INTO `segments` (`id`, `attachment`, `type`, `section`) VALUES
+(1, NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
   `id` varchar(10) NOT NULL,
   `name` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
@@ -194,22 +221,22 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `phone`) VALUES
-('U771234761', 'Yogi Pratama', 'bachtiarnuryogipratama@gmail.com', '085156986819');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`) VALUES
+('U771234761', 'Yogi', 'bachtiarnuryogipratama@gmail.com', '085156986819');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_choice`
+-- Table structure for table `user_choices`
 --
 
-CREATE TABLE `user_choice` (
+CREATE TABLE `user_choices` (
   `id` int(11) NOT NULL,
   `exam_question` int(11) NOT NULL,
-  `choice` varchar(20) NOT NULL
+  `choice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -217,95 +244,132 @@ CREATE TABLE `user_choice` (
 --
 
 --
--- Indexes for table `amount_of_data`
+-- Indexes for table `choices`
 --
-ALTER TABLE `amount_of_data`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `choice`
---
-ALTER TABLE `choice`
+ALTER TABLE `choices`
   ADD PRIMARY KEY (`id`),
   ADD KEY `question` (`question`);
 
 --
--- Indexes for table `code`
+-- Indexes for table `codes`
 --
-ALTER TABLE `code`
+ALTER TABLE `codes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user` (`user`);
 
 --
--- Indexes for table `exam`
+-- Indexes for table `exams`
 --
-ALTER TABLE `exam`
+ALTER TABLE `exams`
   ADD PRIMARY KEY (`id`),
   ADD KEY `schedule` (`schedule`);
 
 --
--- Indexes for table `exam_question`
+-- Indexes for table `exam_questions`
 --
-ALTER TABLE `exam_question`
+ALTER TABLE `exam_questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `exam` (`exam`),
   ADD KEY `question` (`question`);
 
 --
--- Indexes for table `package`
+-- Indexes for table `packages`
 --
-ALTER TABLE `package`
+ALTER TABLE `packages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `question`
+-- Indexes for table `questions`
 --
-ALTER TABLE `question`
+ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `segment` (`segment`);
 
 --
--- Indexes for table `schedule`
+-- Indexes for table `schedules`
 --
-ALTER TABLE `schedule`
+ALTER TABLE `schedules`
   ADD PRIMARY KEY (`id`),
   ADD KEY `package` (`package`);
 
 --
--- Indexes for table `seqment`
+-- Indexes for table `sections`
 --
-ALTER TABLE `seqment`
+ALTER TABLE `sections`
   ADD PRIMARY KEY (`id`),
   ADD KEY `package` (`package`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `segments`
 --
-ALTER TABLE `user`
+ALTER TABLE `segments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `section` (`section`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_choice`
+-- Indexes for table `user_choices`
 --
-ALTER TABLE `user_choice`
+ALTER TABLE `user_choices`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `choice` (`choice`),
-  ADD KEY `exam_question` (`exam_question`);
+  ADD KEY `exam_question` (`exam_question`),
+  ADD KEY `choice` (`choice`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `exam_question`
+-- AUTO_INCREMENT for table `choices`
 --
-ALTER TABLE `exam_question`
+ALTER TABLE `choices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `exam_questions`
+--
+ALTER TABLE `exam_questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_choice`
+-- AUTO_INCREMENT for table `packages`
 --
-ALTER TABLE `user_choice`
+ALTER TABLE `packages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `schedules`
+--
+ALTER TABLE `schedules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `sections`
+--
+ALTER TABLE `sections`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `segments`
+--
+ALTER TABLE `segments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user_choices`
+--
+ALTER TABLE `user_choices`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -313,55 +377,61 @@ ALTER TABLE `user_choice`
 --
 
 --
--- Constraints for table `choice`
+-- Constraints for table `choices`
 --
-ALTER TABLE `choice`
-  ADD CONSTRAINT `choice_ibfk_1` FOREIGN KEY (`question`) REFERENCES `question` (`id`);
+ALTER TABLE `choices`
+  ADD CONSTRAINT `choices_ibfk_1` FOREIGN KEY (`question`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `code`
+-- Constraints for table `codes`
 --
-ALTER TABLE `code`
-  ADD CONSTRAINT `code_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `codes`
+  ADD CONSTRAINT `codes_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `exam`
+-- Constraints for table `exams`
 --
-ALTER TABLE `exam`
-  ADD CONSTRAINT `exam_ibfk_1` FOREIGN KEY (`id`) REFERENCES `code` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `exam_ibfk_2` FOREIGN KEY (`schedule`) REFERENCES `schedule` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `exams`
+  ADD CONSTRAINT `exams_ibfk_1` FOREIGN KEY (`id`) REFERENCES `codes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `exams_ibfk_2` FOREIGN KEY (`schedule`) REFERENCES `schedules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `exam_question`
+-- Constraints for table `exam_questions`
 --
-ALTER TABLE `exam_question`
-  ADD CONSTRAINT `exam_question_ibfk_1` FOREIGN KEY (`exam`) REFERENCES `exam` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `exam_question_ibfk_2` FOREIGN KEY (`question`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `exam_questions`
+  ADD CONSTRAINT `exam_questions_ibfk_1` FOREIGN KEY (`exam`) REFERENCES `exams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `exam_questions_ibfk_2` FOREIGN KEY (`question`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `question`
+-- Constraints for table `questions`
 --
-ALTER TABLE `question`
-  ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`segment`) REFERENCES `seqment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `questions`
+  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`segment`) REFERENCES `segments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `schedule`
+-- Constraints for table `schedules`
 --
-ALTER TABLE `schedule`
-  ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`package`) REFERENCES `package` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `schedules`
+  ADD CONSTRAINT `schedules_ibfk_1` FOREIGN KEY (`package`) REFERENCES `packages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `seqment`
+-- Constraints for table `sections`
 --
-ALTER TABLE `seqment`
-  ADD CONSTRAINT `seqment_ibfk_1` FOREIGN KEY (`package`) REFERENCES `package` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sections`
+  ADD CONSTRAINT `sections_ibfk_1` FOREIGN KEY (`package`) REFERENCES `packages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `user_choice`
+-- Constraints for table `segments`
 --
-ALTER TABLE `user_choice`
-  ADD CONSTRAINT `user_choice_ibfk_1` FOREIGN KEY (`choice`) REFERENCES `choice` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_choice_ibfk_2` FOREIGN KEY (`exam_question`) REFERENCES `exam_question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `segments`
+  ADD CONSTRAINT `segments_ibfk_1` FOREIGN KEY (`section`) REFERENCES `sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_choices`
+--
+ALTER TABLE `user_choices`
+  ADD CONSTRAINT `user_choices_ibfk_2` FOREIGN KEY (`exam_question`) REFERENCES `exam_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_choices_ibfk_3` FOREIGN KEY (`choice`) REFERENCES `choices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

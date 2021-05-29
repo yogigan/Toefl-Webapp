@@ -11,5 +11,4 @@ class Schedule extends Model
 
     public $timestamps = false;
     public $incrementing = false;
-    protected $table = 'schedule';
 }

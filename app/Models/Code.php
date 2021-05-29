@@ -10,5 +10,4 @@ class Code extends Model
     use HasFactory;
     public $timestamps = false;
     public $incrementing = false;
-    protected $table = 'code';
 }

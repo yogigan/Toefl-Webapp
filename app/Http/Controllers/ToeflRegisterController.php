@@ -10,6 +10,12 @@ use App\Models\Schedule;
 
 class ToeflRegisterController extends Controller
 {
+
+    function registerPage(){
+        $data = Schedule::all();
+        return view('toefl-registration-form', ['Schedule'=>$data]);
+    }
+
     function registerToefl(Request $request){
 
         $user = new User();

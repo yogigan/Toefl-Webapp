@@ -10,4 +10,11 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/summernote/summernote.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/summernote/summernote-audio.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/audio-player.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/text-to-image.css') }}">
+
   </head>

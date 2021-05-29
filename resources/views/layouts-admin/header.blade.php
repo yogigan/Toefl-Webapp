@@ -1,6 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title', 'Dashboard &mdash; Stisla')</title>
 
     <!-- General CSS Files -->
@@ -9,5 +10,14 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/summernote/summernote.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/summernote/summernote-audio.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/audio-player.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/text-to-image.css') }}">
+
   </head>

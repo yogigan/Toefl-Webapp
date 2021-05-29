@@ -10,5 +10,4 @@ class Exam extends Model
     use HasFactory;
     public $timestamps = false;
     public $incrementing = false;
-    protected $table = 'exam';
 }

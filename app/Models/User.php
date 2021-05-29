@@ -11,6 +11,5 @@ class User extends Model
 
     public $timestamps = false;
     public $incrementing = false;
-    protected $table = 'user';
 
 }
